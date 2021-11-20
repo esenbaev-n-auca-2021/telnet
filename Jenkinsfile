@@ -1,7 +1,8 @@
 pipeline {
     agent any
     
-    stage('DeployToProduction') { 
+    stages {
+        stagge('DeployToProduction') { 
             when { 
                 branch 'main' 
             } 
@@ -13,13 +14,8 @@ pipeline {
                 ) 
             }
                     sh """ 
-                    mkdir -p ~/.beki
-                    cp ${KUBE_CONFIG_FILE} ~/.beki/config
-                    pwd
-                    ls -la"""
-                    
-                    sh """
-                   
+                    mkdir -p ~/.kube
+                    cp ${KUBE_CONFIG_FILE} ~/.kube/config                
                     kubectl exec nginx -- /bin/bash
                     sudo yum update -y
                     sudo yum install telnet -y
@@ -44,4 +40,4 @@ pipeline {
             sh "echo fail"
         }
     }
-
+}
