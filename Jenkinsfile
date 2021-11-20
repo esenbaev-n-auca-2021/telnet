@@ -3,15 +3,18 @@ pipeline {
     
     stages {
         stage('DeployToProduction') { 
-            steps { 
+            steps{ 
                 input 'Deploy to Production?' 
                 milestone(1) 
                 kubernetesDeploy( 
                     kubeconfigId: 'KUBE_CONFIG0'              
                 ) 
             }
-            
-                script {   
+        }
+        
+        stage(app) {
+            steps{
+                script{   
                     sh """
                     mkdir -p ~/.kube
                     cp ${KUBE_CONFIG_FILE} ~/.kube/config                
@@ -21,9 +24,9 @@ pipeline {
                     sleep 5
                     telnet version                    
                     """
-                    
+                }   
                 }
-                
+        }
           
                
         
@@ -40,5 +43,5 @@ pipeline {
         }
     }
 }
-    }
+   
 }
