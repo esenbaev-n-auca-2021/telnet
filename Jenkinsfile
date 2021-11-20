@@ -7,8 +7,7 @@ pipeline {
                 script{
                     withCredentials([file(credentialsId: 'KUBE_CONFIG', variable: 'KUBE_CONFIG_FILE')]) {  
                     sh """
-                    mkdir -p ~/.kube
-                    cp ${KUBE_CONFIG_FILE} ~/.kube/config 
+                   kubectl exec pod nginx -- /bin/bash
                     """
                     }
                 }
