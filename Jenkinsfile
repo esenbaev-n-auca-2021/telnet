@@ -32,8 +32,8 @@ pipeline {
           
                
         
-        }
-    }
+        
+    
     post {
         success {
             //notifyBuild("SUCCESSFUL")
