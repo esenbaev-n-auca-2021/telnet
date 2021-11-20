@@ -4,15 +4,13 @@ pipeline {
     stages {
         stage('DeployToProduction') { 
             steps{
-                script{
-                    withCredentials([file(credentialsId: 'KUBE_CONFIG', variable: 'KUBE_CONFIG_FILE')]) {  
-                    sh """
-                   kubectl exec pod nginx -- /bin/bash
-                    """
+               kubernetesDeploy(
+                   kubeconfig: 'kubeconfig1'
+                   )
+               
                     }
                 }
-            }
-        }
+            
         
         stage(app) {
             steps{
