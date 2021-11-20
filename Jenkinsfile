@@ -7,7 +7,7 @@ pipeline {
                 input 'Deploy to Production?' 
                 milestone(1) 
                 kubernetesDeploy( 
-                    kubeconfigId: 'KUBE_CONFIG0'              
+                    kubeconfigId: 'KUBE_CONFIG1'              
                 ) 
             }
         }
