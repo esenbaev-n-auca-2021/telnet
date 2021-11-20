@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     stages {
-        stagge('DeployToProduction') { 
+        stage('DeployToProduction') { 
             when { 
                 branch 'main' 
             } 
