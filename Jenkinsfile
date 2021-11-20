@@ -3,12 +3,15 @@ pipeline {
     
     stages {
         stage('DeployToProduction') { 
-            steps{ 
-                input 'Deploy to Production?' 
-                milestone(1) 
-                kubernetesDeploy( 
-                    kubeconfigId: 'kubeconfig'              
-                ) 
+            steps{
+                script{
+                    withCredentials([file(credentialsId: 'KUBE_CONFIG', variable: 'KUBE_CONFIG_FILE')]) {  
+                    sh """
+                    mkdir -p ~/.kube
+                    cp ${KUBE_CONFIG_FILE} ~/.kube/config 
+                    """
+                    }
+                }
             }
         }
         
