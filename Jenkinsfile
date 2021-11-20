@@ -5,7 +5,7 @@ pipeline {
         stage('DeployToProduction') { 
             steps{
                kubernetesDeploy(
-                   kubeconfig: 'kubeconfig1'
+                   kubeconfigId: 'kubeconfig1'
                    )
                
                     }
