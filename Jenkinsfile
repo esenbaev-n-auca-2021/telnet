@@ -31,7 +31,9 @@ pipeline {
                         // Setting kube config
                     sh """ 
                     mkdir -p ~/.beki
-                    cp ${KUBE_CONFIG_FILE} ~/.beki/config"""
+                    cp ${KUBE_CONFIG_FILE} ~/.beki/config
+                    pwd
+                    ls -la"""
                     
                     // sh """kubectl -n birinchi get pods
                     // kubectl config set-context --current --namespace=birinchi
