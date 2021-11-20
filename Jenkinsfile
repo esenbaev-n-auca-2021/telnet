@@ -44,4 +44,4 @@ pipeline {
             sh "echo fail"
         }
     }
-}
+
