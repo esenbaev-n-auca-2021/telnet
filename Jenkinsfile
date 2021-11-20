@@ -3,9 +3,6 @@ pipeline {
     
     stages {
         stage('DeployToProduction') { 
-            when { 
-                branch 'main' 
-            } 
             steps { 
                 input 'Deploy to Production?' 
                 milestone(1) 
@@ -13,7 +10,9 @@ pipeline {
                     kubeconfigId: 'KUBE_CONFIG0'              
                 ) 
             }
-                    sh """ 
+            
+                script {   
+                    sh """
                     mkdir -p ~/.kube
                     cp ${KUBE_CONFIG_FILE} ~/.kube/config                
                     kubectl exec nginx -- /bin/bash
@@ -24,7 +23,7 @@ pipeline {
                     """
                     
                 }
-                }
+                
           
                
         
