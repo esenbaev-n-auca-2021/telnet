@@ -27,21 +27,10 @@ pipeline {
                 }   
                 }
         }
-          
+    }
+}
                
         
         
     
-    post {
-        success {
-            //notifyBuild("SUCCESSFUL")
-            sh "echo success"
-        }
-        failure {
-            //notifyBuild("FAILED")
-            sh "echo fail"
-        }
-    }
-}
    
-}
