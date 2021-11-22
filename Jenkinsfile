@@ -6,8 +6,9 @@ pipeline {
             steps{
                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                             script {
-                                sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip \"kubectl get nodes" \"kubectl exec --stdin --tty nginx -- /bin/bash" \"sudo apt install telnet -y\""
-                              
+                                sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip \"kubectl get nodes\"" 
+                                sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip \"kubectl exec --stdin --tty nginx -- /bin/bash\""
+                                sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip \"sudo apt install telnet -y\""
                                 
                     } 
                 }
