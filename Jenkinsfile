@@ -6,11 +6,10 @@ pipeline {
             steps{
                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                             script {
-                                sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip"
-                                sh "mkdir nur2"
-                                sh "pwd"
+                                sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip \"pwd\""
+                              
                                 
-                    }
+                    } 
                 }
             }
         }
