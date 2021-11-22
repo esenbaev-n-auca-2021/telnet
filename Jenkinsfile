@@ -8,6 +8,7 @@ pipeline {
                             script {
                                 sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip"
                                 sh "mkdir nur"
+                                sh "pwd"
                                 
                     }
                 }
