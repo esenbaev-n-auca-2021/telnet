@@ -4,29 +4,32 @@ pipeline {
     stages {
         stage('DeployToProduction') { 
             steps{
-               kubernetesDeploy(
-                   kubeconfigId: 'kubeconfig'
-                   )
-               
+               withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                            script {
+                                sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$dev_ip"
+                                sh "mkdir nur"
+                                
                     }
                 }
+            }
+        }
             
         
-        stage(app) {
-            steps{
-                script{   
-                    sh """
-                    mkdir -p ~/.kube
-                    cp ${KUBE_CONFIG_FILE} ~/.kube/config                
-                    kubectl exec nginx -- /bin/bash
-                    sudo yum update -y
-                    sudo yum install telnet -y
-                    sleep 5
-                    telnet version                    
-                    """
-                }   
-                }
-        }
+//         stage(app) {
+//             steps{
+//                 script{   
+//                     sh """
+//                     mkdir -p ~/.kube
+//                     cp ${KUBE_CONFIG_FILE} ~/.kube/config                
+//                     kubectl exec nginx -- /bin/bash
+//                     sudo yum update -y
+//                     sudo yum install telnet -y
+//                     sleep 5
+//                     telnet version                    
+//                     """
+//                 }   
+//                 }
+//         }
     }
 }
                
